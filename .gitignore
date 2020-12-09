@@ -1,0 +1,17 @@
+.idea
+out
+*.imlgit
+bin
+tmp
+target
+*.war
+*.log
+Main.java
+*.bak
+*.mwb
+*.class
+*.ctxt
+.mtj.tmp/
+.gradle
+build/
+/.idea/
