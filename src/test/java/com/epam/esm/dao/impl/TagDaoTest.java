@@ -50,7 +50,7 @@ public class TagDaoTest {
     void findAllTest() {
         int expectedListSize = 3;
 
-        List<Tag> allTags = tagDao.findAll( 0, 10);
+        List<Tag> allTags = tagDao.findAll(0, 10);
 
         assertEquals(expectedListSize, allTags.size());
     }

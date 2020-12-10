@@ -19,7 +19,7 @@ public class UserDaoTest {
 
     @Test
     @Transactional
-    void createTest(){
+    void createTest() {
         User userForCreation = buildUser();
         int expectedId = 3;
 
@@ -56,7 +56,7 @@ public class UserDaoTest {
         assertEquals(expectedUsersListSize, resultUsersListSize);
     }
 
-    private User buildUser(){
+    private User buildUser() {
         User user = new User();
         UserRole userRole = new UserRole();
         userRole.setId(1);

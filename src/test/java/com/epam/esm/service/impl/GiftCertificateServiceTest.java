@@ -225,7 +225,7 @@ public class GiftCertificateServiceTest {
 
     }
 
-    private RequestGiftCertificateDto buildRequestGiftCertificateDto(){
+    private RequestGiftCertificateDto buildRequestGiftCertificateDto() {
         RequestGiftCertificateDto requestGiftCertificateDto = new RequestGiftCertificateDto();
         requestGiftCertificateDto.setName(DEFAULT_NAME);
         List<RequestTagDto> requestGiftCertificateTags = new ArrayList<>();
@@ -234,7 +234,7 @@ public class GiftCertificateServiceTest {
         return requestGiftCertificateDto;
     }
 
-    private Pagination buildPagination(){
+    private Pagination buildPagination() {
         Pagination pagination = new Pagination();
         pagination.setPage(1);
         pagination.setSize(2);

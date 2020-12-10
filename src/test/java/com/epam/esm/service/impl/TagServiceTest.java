@@ -159,7 +159,7 @@ public class TagServiceTest {
         params.add("size", "2");
         Pagination pagination = buildPagination();
 
-        when(tagDao.findAll( 0, 2)).thenReturn(tags);
+        when(tagDao.findAll(0, 2)).thenReturn(tags);
         when(responseTagDtoMapper.toDto(any())).thenReturn(new ResponseTagDto());
         when(paginationContextBuilder.defineRecordsPerPageAmount(2)).thenReturn(2);
         when(paginationContextBuilder.defineStartOfRecords(pagination)).thenReturn(0);
@@ -170,7 +170,7 @@ public class TagServiceTest {
 
     }
 
-    private Pagination buildPagination(){
+    private Pagination buildPagination() {
         Pagination pagination = new Pagination();
         pagination.setPage(1);
         pagination.setSize(2);

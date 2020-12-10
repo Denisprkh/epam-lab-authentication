@@ -106,7 +106,7 @@ public class OrderServiceTest {
         assertEquals(expectedOrdersSize, resultOrdersSize);
     }
 
-    private Pagination buildPagination(){
+    private Pagination buildPagination() {
         Pagination pagination = new Pagination();
         pagination.setPage(1);
         pagination.setSize(2);

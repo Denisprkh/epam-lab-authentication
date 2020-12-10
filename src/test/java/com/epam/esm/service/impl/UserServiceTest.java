@@ -102,7 +102,7 @@ public class UserServiceTest {
     }
 
     @Test
-    void createUserTest(){
+    void createUserTest() {
         RequestUserDto requestUserDto = new RequestUserDto();
         requestUserDto.setLogin("login");
         requestUserDto.setPassword("password");
@@ -121,28 +121,28 @@ public class UserServiceTest {
 
     }
 
-    private Pagination buildPagination(){
+    private Pagination buildPagination() {
         Pagination pagination = new Pagination();
         pagination.setPage(1);
         pagination.setSize(2);
         return pagination;
     }
 
-    private UserRole buildRoleUser(){
+    private UserRole buildRoleUser() {
         UserRole userRole = new UserRole();
         userRole.setId(1);
         userRole.setName("ROLE_USER");
         return userRole;
     }
 
-    private User buildUser(String login, String password){
+    private User buildUser(String login, String password) {
         User user = new User();
         user.setLogin(login);
         user.setPassword(password);
         return user;
     }
 
-    private ResponseUserDto buildResponseUserDto(String login, int id){
+    private ResponseUserDto buildResponseUserDto(String login, int id) {
         ResponseUserDto responseUserDto = new ResponseUserDto();
         responseUserDto.setId(id);
         responseUserDto.setLogin(login);

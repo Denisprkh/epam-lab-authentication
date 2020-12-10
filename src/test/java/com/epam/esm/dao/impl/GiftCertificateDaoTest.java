@@ -113,7 +113,7 @@ public class GiftCertificateDaoTest {
 
     }
 
-    private LocalDateTime stringToLocalDateTime(String date){
+    private LocalDateTime stringToLocalDateTime(String date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return LocalDateTime.parse(date, formatter);
     }
