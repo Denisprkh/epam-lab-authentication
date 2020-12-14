@@ -108,14 +108,14 @@ public class TagController {
     }
 
     /**
-     * Finds the most widely used tag of a user with the highest cost of all orders.
+     * Finds the most widely used tag of a user with the highest cost of all purchases.
      *
      * @return found tag.
      */
     @GetMapping(value = "most-paid-popular")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<ResponseTagDto> findTheMostPopularTagInUserWithHighestSumOfOrders() {
-        ResponseTagDto mostPaidPopularTag = tagService.findTheMostPopularTagInUserWithTheHighestCostOfOrders();
+    public ResponseEntity<ResponseTagDto> findTheMostPopularTagInUserWithHighestSumOfPurchases() {
+        ResponseTagDto mostPaidPopularTag = tagService.findTheMostPopularTagInUserWithTheHighestCostOfPurchases();
         return new ResponseEntity<>(responseTagDtoLinkBuilder.buildLinks(mostPaidPopularTag), HttpStatus.OK);
     }
 

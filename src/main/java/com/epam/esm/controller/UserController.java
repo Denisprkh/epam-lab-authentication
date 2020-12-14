@@ -44,7 +44,7 @@ public class UserController {
     }
 
     /**
-     * Find order by id.
+     * Finds user by id.
      * If no resource found {@code HttpStatus.NOT_FOUND} is returned.
      *
      * @param id {@code User}'s id.

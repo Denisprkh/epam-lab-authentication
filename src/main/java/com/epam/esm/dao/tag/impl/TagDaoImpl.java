@@ -23,15 +23,15 @@ public class TagDaoImpl implements TagDao {
 
     private final EntityManager entityManager;
     private static final int SUCCESSFULLY_UPDATED_ROW = 1;
-    private static final String FIND_THE_MOST_POPULAR_TAG_IN_HIGHEST_SUM_OF_ORDERS = "SELECT tag_id, name FROM " +
+    private static final String FIND_THE_MOST_POPULAR_TAG_IN_HIGHEST_SUM_OF_PURCHASES = "SELECT tag_id, name FROM " +
             "(SELECT tag.tag_id AS tag_id, tag.name AS name, COUNT(tag.tag_id) AS tag_count FROM tag JOIN " +
             "gift_certificate_tag ON tag.tag_id = gift_certificate_tag.tag_id JOIN gift_certificate ON " +
-            "gift_certificate_tag.gift_certificate_id = gift_certificate.gift_certificate_id JOIN order_gift_certificate " +
-            "ON gift_certificate.gift_certificate_id = order_gift_certificate.gift_certificate_id JOIN certificates.order " +
-            "ON order_gift_certificate.order_id = certificates.order.order_id JOIN (select SUM(certificates.order.cost) AS" +
-            " order_cost, certificates.order.user_id AS user_id FROM certificates.order GROUP BY user_id) AS ho ON " +
-            "certificates.order.user_id = ho.user_id WHERE order_cost = (SELECT SUM(cost) AS order_cost FROM certificates.order " +
-            "GROUP BY certificates.order.user_id ORDER BY order_cost DESC LIMIT 1) GROUP BY tag_id ORDER BY tag_count DESC limit 1) AS res";
+            "gift_certificate_tag.gift_certificate_id = gift_certificate.gift_certificate_id JOIN purchase_gift_certificate " +
+            "ON gift_certificate.gift_certificate_id = purchase_gift_certificate.gift_certificate_id JOIN purchase " +
+            "ON purchase_gift_certificate.purchase_id = purchase.purchase_id JOIN (select SUM(purchase.cost) AS" +
+            " purchase_cost, purchase.user_id AS user_id FROM purchase GROUP BY user_id) AS ho ON " +
+            "purchase.user_id = ho.user_id WHERE purchase_cost = (SELECT SUM(cost) AS purchase_cost FROM purchase " +
+            "GROUP BY purchase.user_id ORDER BY purchase_cost DESC LIMIT 1) GROUP BY tag_id ORDER BY tag_count DESC limit 1) AS res";
     private static final String DELETE_GIFT_CERTIFICATE_TAG = "DELETE FROM gift_certificate_tag WHERE tag_id=:tag_id";
     private static final String FIND_TAG_BY_NAME = "FROM Tag t where t.name=:name";
     private static final String FIND_TAGS = "FROM Tag";
@@ -97,8 +97,8 @@ public class TagDaoImpl implements TagDao {
     }
 
     @Override
-    public Tag findTheMostPopularTagInUserWithTheHighestCostOfOrders() {
-        return entityManager.unwrap(Session.class).createNativeQuery(FIND_THE_MOST_POPULAR_TAG_IN_HIGHEST_SUM_OF_ORDERS,
+    public Tag findTheMostPopularTagInUserWithTheHighestCostOfPurchases() {
+        return entityManager.unwrap(Session.class).createNativeQuery(FIND_THE_MOST_POPULAR_TAG_IN_HIGHEST_SUM_OF_PURCHASES,
                 Tag.class).getSingleResult();
     }
 

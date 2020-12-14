@@ -1,16 +1,13 @@
 package com.epam.esm.security.util;
 
+import com.epam.esm.exception.JwtFormatException;
 import com.epam.esm.security.JwtConfig;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import javax.xml.bind.DatatypeConverter;
-import java.security.AlgorithmConstraints;
 import java.sql.Date;
 import java.time.LocalDate;
 
@@ -25,7 +22,7 @@ public class JwtUtil {
         this.jwtConfig = jwtConfig;
     }
 
-    public String generateToken(UserDetails userDetails){
+    public String generateToken(UserDetails userDetails) {
         return Jwts
                 .builder()
                 .setSubject(userDetails.getUsername())
@@ -36,11 +33,16 @@ public class JwtUtil {
                 .compact();
     }
 
-    private Claims extractClaims(String token){
-        return Jwts.parser().setSigningKey(jwtConfig.getKeyAsByteArray()).parseClaimsJws(token).getBody();
+    private Claims extractClaims(String token) {
+        try {
+            return Jwts.parser().setSigningKey(jwtConfig.getKeyAsByteArray()).parseClaimsJws(token).getBody();
+        } catch (JwtException | IllegalArgumentException e) {
+            throw new JwtFormatException();
+        }
+
     }
 
-    private boolean tokenExpired(String token){
+    private boolean tokenExpired(String token) {
         LOG.debug(extractClaims(token)
                 .getExpiration());
         return extractClaims(token)
@@ -48,11 +50,12 @@ public class JwtUtil {
                 .before(Date.valueOf(LocalDate.now()));
     }
 
-    public String extractLogin(String token){
+
+    public String extractLogin(String token) {
         return extractClaims(token).getSubject();
     }
 
-    public boolean tokenIsValid(String token, UserDetails userDetails){
+    public boolean tokenIsValid(String token, UserDetails userDetails) {
         String login = extractLogin(token);
         return (userDetails.getUsername().equals(login) && !tokenExpired(token));
     }

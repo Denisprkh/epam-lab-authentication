@@ -58,11 +58,11 @@ public interface TagService {
     List<ResponseTagDto> findAll(Pagination pagination);
 
     /**
-     * Finds the most widely used tag of a user with the highest cost of all orders.
+     * Finds the most widely used tag of a user with the highest cost of all purchases.
      *
      * @return {@code ResponseTagDto} found tag.
      */
-    ResponseTagDto findTheMostPopularTagInUserWithTheHighestCostOfOrders();
+    ResponseTagDto findTheMostPopularTagInUserWithTheHighestCostOfPurchases();
 
     /**
      * Finds quantity of all tags.

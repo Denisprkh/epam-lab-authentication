@@ -72,8 +72,8 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public ResponseTagDto findTheMostPopularTagInUserWithTheHighestCostOfOrders() {
-        return responseTagDtoMapper.toDto(tagDao.findTheMostPopularTagInUserWithTheHighestCostOfOrders());
+    public ResponseTagDto findTheMostPopularTagInUserWithTheHighestCostOfPurchases() {
+        return responseTagDtoMapper.toDto(tagDao.findTheMostPopularTagInUserWithTheHighestCostOfPurchases());
     }
 
     @Override

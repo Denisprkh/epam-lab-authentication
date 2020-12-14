@@ -27,11 +27,13 @@ public final class GiftCertificateSearchCriteriaBuilder {
     private static final String ASSOCIATION_LIST_NAME = "tags";
 
 
-    public CriteriaQuery<GiftCertificate> buildCriteriaQuery(GiftCertificateCriteria giftCertificateCriteria
-            , EntityManager entityManager) {
+    public CriteriaQuery<GiftCertificate> buildCriteriaQuery(GiftCertificateCriteria giftCertificateCriteria,
+                                                             EntityManager entityManager, String giftCertificateAlias,
+                                                             String joinTagsAlias) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<GiftCertificate> criteriaQuery = criteriaBuilder.createQuery(GiftCertificate.class);
         Root<GiftCertificate> certificateRoot = criteriaQuery.from(GiftCertificate.class);
+        certificateRoot.alias(giftCertificateAlias);
         List<Predicate> predicates = new ArrayList<>();
         if (nonNull(giftCertificateCriteria.getGiftCertDesc())) {
             predicates.add(buildDescriptionSearchPredicate(certificateRoot, giftCertificateCriteria, criteriaBuilder));
@@ -44,7 +46,8 @@ public final class GiftCertificateSearchCriteriaBuilder {
         if (nonNull(giftCertificateCriteria.getTagName())) {
             Expression<Long> countOfCertificatesInGroup = criteriaBuilder.count(certificateRoot);
             int tagParameterSize = giftCertificateCriteria.getTagName().size();
-            predicates.add(criteriaBuilder.and(buildTagNameSearchPredicate(certificateRoot, giftCertificateCriteria)));
+            predicates.add(criteriaBuilder.and(buildTagNameSearchPredicate(certificateRoot, giftCertificateCriteria,
+                    joinTagsAlias)));
             criteriaQuery.
                     groupBy(certificateRoot).having(criteriaBuilder.equal(countOfCertificatesInGroup, tagParameterSize));
         }
@@ -69,9 +72,11 @@ public final class GiftCertificateSearchCriteriaBuilder {
                 PERCENT_SIGN + giftCertificateCriteria.getGiftCertName() + PERCENT_SIGN);
     }
 
-    private Predicate buildTagNameSearchPredicate(Root<GiftCertificate> certificateRoot, GiftCertificateCriteria giftCertificateCriteria) {
+    private Predicate buildTagNameSearchPredicate(Root<GiftCertificate> certificateRoot, GiftCertificateCriteria giftCertificateCriteria,
+                                                  String joinTagsAlias) {
         List<String> tagNames = new ArrayList<>(giftCertificateCriteria.getTagName());
         Join<GiftCertificate, Tag> tagTable = certificateRoot.join(ASSOCIATION_LIST_NAME);
+        tagTable.alias(joinTagsAlias);
         return tagTable.get(TagParameter.TAG_NAME).in(tagNames);
     }
 

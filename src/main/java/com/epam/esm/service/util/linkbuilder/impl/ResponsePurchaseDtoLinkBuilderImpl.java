@@ -1,9 +1,9 @@
 package com.epam.esm.service.util.linkbuilder.impl;
 
 import com.epam.esm.controller.GiftCertificateController;
-import com.epam.esm.controller.OrderController;
+import com.epam.esm.controller.PurchaseController;
 import com.epam.esm.controller.UserController;
-import com.epam.esm.dto.ResponseOrderDto;
+import com.epam.esm.dto.ResponsePurchaseDto;
 import com.epam.esm.entity.Pagination;
 import com.epam.esm.service.util.linkbuilder.LinkName;
 import com.epam.esm.service.util.linkbuilder.NavigationLinkBuilder;
@@ -19,26 +19,26 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Component
-public class ResponseOrderDtoLinkBuilderImpl implements NavigationLinkBuilder<ResponseOrderDto> {
+public class ResponsePurchaseDtoLinkBuilderImpl implements NavigationLinkBuilder<ResponsePurchaseDto> {
 
 
     @Override
-    public ResponseOrderDto buildLinks(ResponseOrderDto responseOrderDto) {
-        responseOrderDto.add(linkTo(OrderController.class).slash(responseOrderDto.getId()).withSelfRel());
-        responseOrderDto.add(linkTo(methodOn(OrderController.class).findAllOrders(new Pagination(), new HashMap<>()))
+    public ResponsePurchaseDto buildLinks(ResponsePurchaseDto responsePurchaseDto) {
+        responsePurchaseDto.add(linkTo(PurchaseController.class).slash(responsePurchaseDto.getId()).withSelfRel());
+        responsePurchaseDto.add(linkTo(methodOn(PurchaseController.class).findAllPurchases(new Pagination(), new HashMap<>()))
                 .withRel(LinkName.ALL_RESOURCES));
-        buildLinksToGiftCertificateById(responseOrderDto);
-        responseOrderDto.add(linkTo(methodOn(UserController.class).findUserById(responseOrderDto.getUserId())).
+        buildLinksToGiftCertificateById(responsePurchaseDto);
+        responsePurchaseDto.add(linkTo(methodOn(UserController.class).findUserById(responsePurchaseDto.getUserId())).
                 withRel(LinkName.USER));
 
-        return responseOrderDto;
+        return responsePurchaseDto;
     }
 
-    private void buildLinksToGiftCertificateById(ResponseOrderDto responseOrderDto) {
-        List<Integer> certificatesId = responseOrderDto.getCertificatesId();
+    private void buildLinksToGiftCertificateById(ResponsePurchaseDto responsePurchaseDto) {
+        List<Integer> certificatesId = responsePurchaseDto.getCertificatesId();
         List<Link> links = certificatesId.stream().map(certId -> linkTo(methodOn(GiftCertificateController.class).findGiftCertificateById(certId)).withRel(LinkName.GIFT_CERTIFICATE))
                 .collect(Collectors.toList());
-        responseOrderDto.add(links);
+        responsePurchaseDto.add(links);
     }
 
 }

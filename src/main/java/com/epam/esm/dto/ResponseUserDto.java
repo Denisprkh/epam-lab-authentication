@@ -1,6 +1,5 @@
 package com.epam.esm.dto;
 
-import com.epam.esm.entity.UserRole;
 import org.springframework.hateoas.RepresentationModel;
 
 public class ResponseUserDto extends RepresentationModel<ResponseUserDto> {

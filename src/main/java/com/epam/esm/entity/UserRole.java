@@ -1,8 +1,11 @@
 package com.epam.esm.entity;
 
+import org.hibernate.envers.Audited;
+
 import javax.persistence.*;
 
 @Entity
+@Audited
 @Table(name = "user_role")
 public class UserRole {
 

@@ -1,7 +1,7 @@
 package com.epam.esm.service.util.linkbuilder.impl;
 
 import com.epam.esm.controller.UserController;
-import com.epam.esm.controller.UserOrderController;
+import com.epam.esm.controller.UserPurchaseController;
 import com.epam.esm.dto.ResponseUserDto;
 import com.epam.esm.entity.Pagination;
 import com.epam.esm.service.util.linkbuilder.LinkName;
@@ -20,8 +20,8 @@ public class ResponseUserDtoLinkBuilderImpl implements NavigationLinkBuilder<Res
     @Override
     public ResponseUserDto buildLinks(ResponseUserDto responseUserDto) {
         responseUserDto.add(linkTo(UserController.class).slash(responseUserDto.getId()).withSelfRel());
-        responseUserDto.add(linkTo(methodOn(UserOrderController.class).findUsersOrders(responseUserDto.getId(), new HashSet<>()))
-                .withRel(LinkName.USER_ORDERS));
+        responseUserDto.add(linkTo(methodOn(UserPurchaseController.class).findUsersPurchases(responseUserDto.getId(), new HashSet<>()))
+                .withRel(LinkName.USER_PURCHASES));
         responseUserDto.add(linkTo(methodOn(UserController.class).findAllUsers(new Pagination(), new HashMap<>()))
                 .withRel(LinkName.ALL_RESOURCES));
         return responseUserDto;

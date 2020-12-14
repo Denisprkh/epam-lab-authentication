@@ -56,6 +56,4 @@ public class ResponseGiftCertificateDtoMapper implements DtoMapper<ResponseGiftC
     }
 
 
-
-
 }

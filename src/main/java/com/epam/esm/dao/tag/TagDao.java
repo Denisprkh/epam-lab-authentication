@@ -27,11 +27,11 @@ public interface TagDao extends CommonDao<Tag, Integer> {
     Optional<Tag> findTagByName(String tagName);
 
     /**
-     * Finds the most widely used tag of a user with the highest cost of all orders.
+     * Finds the most widely used tag of a user with the highest cost of all purchases.
      *
      * @return {@code Tag}.
      */
-    Tag findTheMostPopularTagInUserWithTheHighestCostOfOrders();
+    Tag findTheMostPopularTagInUserWithTheHighestCostOfPurchases();
 
     /**
      * Finds amount of all {@code Tag} stored in datasource

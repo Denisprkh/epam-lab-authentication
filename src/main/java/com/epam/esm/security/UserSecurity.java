@@ -1,7 +1,7 @@
 package com.epam.esm.security;
 
-import com.epam.esm.dto.ResponseOrderDto;
-import com.epam.esm.service.OrderService;
+import com.epam.esm.dto.ResponsePurchaseDto;
+import com.epam.esm.service.PurchaseService;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service;
 public class UserSecurity {
 
     private final JwtUserDetailsService userDetailsService;
-    private final OrderService orderService;
+    private final PurchaseService purchaseService;
 
-    public UserSecurity(JwtUserDetailsService userDetailsService, OrderService orderService) {
+    public UserSecurity(JwtUserDetailsService userDetailsService, PurchaseService purchaseService) {
         this.userDetailsService = userDetailsService;
-        this.orderService = orderService;
+        this.purchaseService = purchaseService;
     }
 
     public boolean hasUserId(Authentication authentication, Integer userId) {
@@ -21,9 +21,9 @@ public class UserSecurity {
         return jwtUser.getId().equals(userId);
     }
 
-    public boolean isUsersOrder(Authentication authentication, Integer orderId) {
-        ResponseOrderDto order = orderService.findOrderById(orderId);
+    public boolean isUsersPurchase(Authentication authentication, Integer purchaseId) {
+        ResponsePurchaseDto purchase = purchaseService.findPurchaseById(purchaseId);
         JwtUser jwtUser = (JwtUser) userDetailsService.loadUserByUsername(authentication.getName());
-        return jwtUser.getId().equals(order.getUserId());
+        return jwtUser.getId().equals(purchase.getUserId());
     }
 }

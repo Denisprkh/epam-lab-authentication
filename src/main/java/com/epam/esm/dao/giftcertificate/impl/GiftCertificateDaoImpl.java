@@ -23,6 +23,9 @@ public class GiftCertificateDaoImpl implements GiftCertificateDao {
     private final EntityManager entityManager;
     private final GiftCertificateSearchCriteriaBuilder searchCriteriaBuilder;
     public static final String FIND_GIFT_CERTIFICATE_BY_NAME = "FROM GiftCertificate gc WHERE gc.name=:name";
+    private static final String GIFT_CERTIFICATE_ALIAS = "certificateAlias";
+    private static final String JOIN_TAG_ALIAS = "tagAlias";
+    private static final String ASSOCIATION_LIST_NAME = "tags";
 
     public GiftCertificateDaoImpl(EntityManager entityManager, GiftCertificateSearchCriteriaBuilder searchCriteriaBuilder) {
         this.entityManager = entityManager;
@@ -79,16 +82,23 @@ public class GiftCertificateDaoImpl implements GiftCertificateDao {
 
     @Override
     public Integer findQuantity(GiftCertificateCriteria giftCertificateCriteria) {
+        CriteriaQuery<GiftCertificate> searchQuery = searchCriteriaBuilder.buildCriteriaQuery(giftCertificateCriteria,
+                entityManager, GIFT_CERTIFICATE_ALIAS, JOIN_TAG_ALIAS);
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Long> criteriaQuery = criteriaBuilder.createQuery(Long.class);
-        criteriaQuery.select(criteriaBuilder.count(criteriaQuery.from(GiftCertificate.class)));
+        Root<GiftCertificate> giftCertificateRoot = criteriaQuery.from(GiftCertificate.class);
+        giftCertificateRoot.alias(GIFT_CERTIFICATE_ALIAS);
+        giftCertificateRoot.join(ASSOCIATION_LIST_NAME).alias(JOIN_TAG_ALIAS);
+        criteriaQuery.where(searchQuery.getRestriction());
+        criteriaQuery.select(criteriaBuilder.countDistinct(giftCertificateRoot));
         return entityManager.createQuery(criteriaQuery).getSingleResult().intValue();
     }
 
     @Override
     public List<GiftCertificate> findAll(GiftCertificateCriteria giftCertificateCriteria, int startOfRecords,
                                          int recordsPerPageAmount) {
-        CriteriaQuery<GiftCertificate> searchQuery = searchCriteriaBuilder.buildCriteriaQuery(giftCertificateCriteria, entityManager);
+        CriteriaQuery<GiftCertificate> searchQuery = searchCriteriaBuilder.buildCriteriaQuery(giftCertificateCriteria,
+                entityManager, GIFT_CERTIFICATE_ALIAS, JOIN_TAG_ALIAS);
         return entityManager.createQuery(searchQuery)
                 .setFirstResult(startOfRecords)
                 .setMaxResults(recordsPerPageAmount)

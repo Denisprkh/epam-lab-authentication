@@ -2,7 +2,6 @@ package com.epam.esm.security;
 
 import com.epam.esm.dao.user.UserDao;
 import com.epam.esm.entity.User;
-import com.epam.esm.security.JwtUser;
 import com.epam.esm.security.mapper.UserToUserDetailsMapper;
 import com.epam.esm.util.ResourceBundleErrorMessage;
 import org.springframework.security.core.userdetails.UserDetails;

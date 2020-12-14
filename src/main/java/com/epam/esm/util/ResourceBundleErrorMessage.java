@@ -15,8 +15,8 @@ public final class ResourceBundleErrorMessage {
     public static final String INTERNAL_SERVER_ERROR = "error.internal_server_error";
     public static final String CERTIFICATE_ALREADY_EXISTS = "error.certificate.already_exists";
     public static final String CERTIFICATE_DURATION_FORMAT = "error.certificate.duration_format";
-    public static final String ORDER_USER_ID_REQUIRED = "error.order.user_id_required";
-    public static final String ORDER_CERTIFICATES_ID_REQUIRED = "error.order.certificate_id_required";
+    public static final String PURCHASE_USER_ID_REQUIRED = "error.purchase.user_id_required";
+    public static final String PURCHASE_CERTIFICATES_ID_REQUIRED = "error.purchase.certificate_id_required";
     public static final String NOT_READABLE_EXCEPTION = "error.not_readable";
     public static final String PAGE_PARAMETER_IS_REQUIRED = "error.page_parameter_required";
     public static final String SIZE_PARAMETER_IS_REQUIRED = "error.size_parameter_required";
@@ -29,6 +29,7 @@ public final class ResourceBundleErrorMessage {
     public static final String LOGIN_FORMAT = "error.user.login_format";
     public static final String PASSWORD_REQUIRED = "error.user.password_required";
     public static final String PASSWORD_FORMAT = "error.user.password_format";
+    public static final String JWT_FORMAT = "error.jwt.format";
 
     private ResourceBundleErrorMessage() {
     }

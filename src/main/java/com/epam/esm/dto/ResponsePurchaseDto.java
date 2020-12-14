@@ -5,7 +5,7 @@ import org.springframework.hateoas.RepresentationModel;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class ResponseOrderDto extends RepresentationModel<ResponseOrderDto> {
+public class ResponsePurchaseDto extends RepresentationModel<ResponsePurchaseDto> {
 
     private int id;
 
@@ -63,7 +63,7 @@ public class ResponseOrderDto extends RepresentationModel<ResponseOrderDto> {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
 
-        ResponseOrderDto that = (ResponseOrderDto) o;
+        ResponsePurchaseDto that = (ResponsePurchaseDto) o;
 
         if (id != that.id) return false;
         if (userId != that.userId) return false;

@@ -1,3 +1,5 @@
+-- MySQL Workbench Forward Engineering
+
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
@@ -6,6 +8,9 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- Schema certificates
 -- -----------------------------------------------------
 
+-- -----------------------------------------------------
+-- Schema certificates
+-- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `certificates` DEFAULT CHARACTER SET utf8 ;
 USE `certificates` ;
 
@@ -25,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `certificates`.`tag` (
 CREATE TABLE IF NOT EXISTS `certificates`.`gift_certificate` (
   `gift_certificate_id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
-  `price` DECIMAL(5,2) NOT NULL,
+  `price` DECIMAL NOT NULL,
   `create_date` TIMESTAMP NOT NULL,
   `last_update_date` TIMESTAMP NOT NULL,
   `duration` BIGINT NOT NULL,
@@ -75,41 +80,41 @@ CREATE TABLE IF NOT EXISTS `certificates`.`user` (
     REFERENCES `certificates`.`user_role` (`user_role_id`));
 
 
-
 -- -----------------------------------------------------
--- Table `certificates`.`order`
+-- Table `certificates`.`purchase`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `certificates`.`order` (
-  `order_id` INT NOT NULL AUTO_INCREMENT,
-  `cost` DECIMAL(5,2) NOT NULL,
+CREATE TABLE IF NOT EXISTS `certificates`.`purchase` (
+  `purchase_id` INT NOT NULL AUTO_INCREMENT,
+  `cost` DECIMAL NOT NULL,
   `purchase_date` TIMESTAMP NOT NULL,
   `user_id` INT NOT NULL,
-  PRIMARY KEY (`order_id`),
-  INDEX `fk_order_user1_idx` (`user_id` ASC),
-  CONSTRAINT `fk_order_user1`
+  PRIMARY KEY (`purchase_id`),
+  INDEX `fk_purchase_user1_idx` (`user_id` ASC),
+  CONSTRAINT `fk_purchase_user1`
     FOREIGN KEY (`user_id`)
     REFERENCES `certificates`.`user` (`user_id`));
 
 
 -- -----------------------------------------------------
--- Table `certificates`.`order_gift_certificate`
+-- Table `certificates`.`purchase_gift_certificate`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `certificates`.`order_gift_certificate` (
-  `order_id` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `certificates`.`purchase_gift_certificate` (
   `gift_certificate_id` INT NOT NULL,
-  PRIMARY KEY (`order_id`, `gift_certificate_id`),
-  INDEX `fk_orders_gift_certificate_order1_idx` (`order_id` ASC),
+  `purchase_id` INT NOT NULL,
+  PRIMARY KEY (`gift_certificate_id`, `purchase_id`),
   INDEX `fk_orders_gift_certificate_gift_certificate1_idx` (`gift_certificate_id` ASC),
-  CONSTRAINT `fk_orders_gift_certificate_order1`
-    FOREIGN KEY (`order_id`)
-    REFERENCES `certificates`.`order` (`order_id`),
+  INDEX `fk_purchase_gift_certificate_purchase1_idx` (`purchase_id` ASC),
   CONSTRAINT `fk_orders_gift_certificate_gift_certificate1`
     FOREIGN KEY (`gift_certificate_id`)
-    REFERENCES `certificates`.`gift_certificate` (`gift_certificate_id`));
+    REFERENCES `certificates`.`gift_certificate` (`gift_certificate_id`),
+  CONSTRAINT `fk_purchase_gift_certificate_purchase1`
+    FOREIGN KEY (`purchase_id`)
+    REFERENCES `certificates`.`purchase` (`purchase_id`));
 
 INSERT INTO user_role(name) VALUES ('ROLE_USER'), ('ROLE_ADMIN');
-INSERT INTO user(login, password) VALUES ('admin', '$2a$10$3A0xvWaRn8YR2dvhSfFJDOCyDxhVJmLuCxxN/ArFcKDkSjtap1YUe')
+INSERT INTO user(login, password, user_role_id) VALUES ('admin', '$2a$10$3A0xvWaRn8YR2dvhSfFJDOCyDxhVJmLuCxxN/ArFcKDkSjtap1YUe', 2);
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+

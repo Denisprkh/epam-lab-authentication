@@ -1,18 +1,20 @@
 package com.epam.esm.entity;
 
+import org.hibernate.envers.Audited;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "\"order\"")
-public class Order {
+@Audited
+@Table(name = "purchase")
+public class Purchase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "order_id")
+    @Column(name = "purchase_id")
     private Integer id;
 
     @Column(name = "cost")
@@ -26,7 +28,7 @@ public class Order {
     private User user;
 
     @ManyToMany(cascade = CascadeType.MERGE)
-    @JoinTable(name = "order_gift_certificate", joinColumns = @JoinColumn(name = "order_id"),
+    @JoinTable(name = "purchase_gift_certificate", joinColumns = @JoinColumn(name = "purchase_id"),
             inverseJoinColumns = @JoinColumn(name = "gift_certificate_id"))
     private List<GiftCertificate> giftCertificates;
 
@@ -75,13 +77,14 @@ public class Order {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Order order = (Order) o;
+        Purchase purchase = (Purchase) o;
 
-        if (id != null ? !id.equals(order.id) : order.id != null) return false;
-        if (cost != null ? !cost.equals(order.cost) : order.cost != null) return false;
-        if (purchaseDate != null ? !purchaseDate.equals(order.purchaseDate) : order.purchaseDate != null) return false;
-        if (user != null ? !user.equals(order.user) : order.user != null) return false;
-        return giftCertificates != null ? giftCertificates.equals(order.giftCertificates) : order.giftCertificates == null;
+        if (id != null ? !id.equals(purchase.id) : purchase.id != null) return false;
+        if (cost != null ? !cost.equals(purchase.cost) : purchase.cost != null) return false;
+        if (purchaseDate != null ? !purchaseDate.equals(purchase.purchaseDate) : purchase.purchaseDate != null)
+            return false;
+        if (user != null ? !user.equals(purchase.user) : purchase.user != null) return false;
+        return giftCertificates != null ? giftCertificates.equals(purchase.giftCertificates) : purchase.giftCertificates == null;
     }
 
     @Override
@@ -96,7 +99,7 @@ public class Order {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Order{");
+        final StringBuilder sb = new StringBuilder("Purchase{");
         sb.append("id=").append(id);
         sb.append(", cost=").append(cost);
         sb.append(", purchaseDate=").append(purchaseDate);

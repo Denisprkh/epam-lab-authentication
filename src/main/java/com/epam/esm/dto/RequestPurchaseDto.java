@@ -5,12 +5,12 @@ import com.epam.esm.util.ResourceBundleErrorMessage;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-public class RequestOrderDto {
+public class RequestPurchaseDto {
 
-    @NotNull(message = ResourceBundleErrorMessage.ORDER_USER_ID_REQUIRED)
+    @NotNull(message = ResourceBundleErrorMessage.PURCHASE_USER_ID_REQUIRED)
     private Integer userId;
 
-    @NotNull(message = ResourceBundleErrorMessage.ORDER_CERTIFICATES_ID_REQUIRED)
+    @NotNull(message = ResourceBundleErrorMessage.PURCHASE_CERTIFICATES_ID_REQUIRED)
     private List<Integer> certificatesId;
 
     public Integer getUserId() {
@@ -34,7 +34,7 @@ public class RequestOrderDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        RequestOrderDto that = (RequestOrderDto) o;
+        RequestPurchaseDto that = (RequestPurchaseDto) o;
 
         if (userId != that.userId) return false;
         return certificatesId != null ? certificatesId.equals(that.certificatesId) : that.certificatesId == null;
