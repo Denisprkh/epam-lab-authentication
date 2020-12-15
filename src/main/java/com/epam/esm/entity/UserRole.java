@@ -6,16 +6,19 @@ import javax.persistence.*;
 
 @Entity
 @Audited
-@Table(name = "user_role")
+@Table(name = "role")
 public class UserRole {
 
     @Id
-    @Column(name = "user_role_id")
+    @Column(name = "role_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "name")
     private String name;
+
+    @Column(name = "is_default")
+    private Boolean isDefault;
 
     public Integer getId() {
         return id;
@@ -33,14 +36,13 @@ public class UserRole {
         this.name = name;
     }
 
-    public UserRole() {
+    public Boolean getDefault() {
+        return isDefault;
     }
 
-    public UserRole(Integer id, String name) {
-        this.id = id;
-        this.name = name;
+    public void setDefault(Boolean aDefault) {
+        isDefault = aDefault;
     }
-
 
     @Override
     public boolean equals(Object o) {
@@ -50,13 +52,15 @@ public class UserRole {
         UserRole userRole = (UserRole) o;
 
         if (id != null ? !id.equals(userRole.id) : userRole.id != null) return false;
-        return name != null ? name.equals(userRole.name) : userRole.name == null;
+        if (name != null ? !name.equals(userRole.name) : userRole.name != null) return false;
+        return isDefault != null ? isDefault.equals(userRole.isDefault) : userRole.isDefault == null;
     }
 
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (isDefault != null ? isDefault.hashCode() : 0);
         return result;
     }
 
@@ -65,6 +69,7 @@ public class UserRole {
         final StringBuilder sb = new StringBuilder("UserRole{");
         sb.append("id=").append(id);
         sb.append(", name='").append(name).append('\'');
+        sb.append(", isDefault=").append(isDefault);
         sb.append('}');
         return sb.toString();
     }

@@ -1,6 +1,7 @@
 package com.epam.esm.configuration;
 
 import com.epam.esm.security.filter.JwtAuthorizationFilter;
+import com.epam.esm.security.filter.JwtExceptionHandlerFilter;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,19 +24,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
     private final JwtAuthorizationFilter jwtAuthorizationFilter;
+    private final JwtExceptionHandlerFilter jwtExceptionHandlerFilter;
 
     public SecurityConfig(@Qualifier("jwtUserDetailsService") UserDetailsService userDetailsService,
-                          JwtAuthorizationFilter jwtAuthorizationFilter) {
+                          JwtAuthorizationFilter jwtAuthorizationFilter, JwtExceptionHandlerFilter jwtExceptionHandlerFilter) {
         this.userDetailsService = userDetailsService;
         this.jwtAuthorizationFilter = jwtAuthorizationFilter;
+        this.jwtExceptionHandlerFilter = jwtExceptionHandlerFilter;
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-                .exceptionHandling().and().sessionManagement()
+        http
+                .csrf().disable()
+                .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
+
+        http
+                .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(jwtExceptionHandlerFilter, JwtAuthorizationFilter.class);
+
     }
 
     @Override

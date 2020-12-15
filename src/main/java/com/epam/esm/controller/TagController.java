@@ -1,6 +1,6 @@
 package com.epam.esm.controller;
 
-import com.epam.esm.entity.Pagination;
+import com.epam.esm.controller.util.Pagination;
 import com.epam.esm.service.util.pagination.PaginationResourceResolver;
 import com.epam.esm.service.util.linkbuilder.NavigationLinkBuilder;
 import com.epam.esm.dto.RequestTagDto;

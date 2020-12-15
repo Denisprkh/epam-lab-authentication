@@ -3,6 +3,7 @@ package com.epam.esm.security.util;
 import com.epam.esm.exception.JwtFormatException;
 import com.epam.esm.security.JwtConfig;
 import io.jsonwebtoken.*;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -34,12 +35,7 @@ public class JwtUtil {
     }
 
     private Claims extractClaims(String token) {
-        try {
-            return Jwts.parser().setSigningKey(jwtConfig.getKeyAsByteArray()).parseClaimsJws(token).getBody();
-        } catch (JwtException | IllegalArgumentException e) {
-            throw new JwtFormatException();
-        }
-
+        return Jwts.parser().setSigningKey(jwtConfig.getKeyAsByteArray()).parseClaimsJws(token).getBody();
     }
 
     private boolean tokenExpired(String token) {
@@ -58,5 +54,9 @@ public class JwtUtil {
     public boolean tokenIsValid(String token, UserDetails userDetails) {
         String login = extractLogin(token);
         return (userDetails.getUsername().equals(login) && !tokenExpired(token));
+    }
+
+    public String extractToken(String authorizationHeader) {
+        return authorizationHeader.replace(jwtConfig.getTokenPrefix(), StringUtils.EMPTY);
     }
 }

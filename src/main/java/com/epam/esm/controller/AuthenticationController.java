@@ -2,7 +2,7 @@ package com.epam.esm.controller;
 
 import com.epam.esm.dto.RequestUserDto;
 import com.epam.esm.dto.ResponseUserDto;
-import com.epam.esm.entity.AuthenticationResponse;
+import com.epam.esm.controller.util.AuthenticationResponse;
 import com.epam.esm.security.JwtUser;
 import com.epam.esm.security.util.JwtUtil;
 import com.epam.esm.service.UserService;

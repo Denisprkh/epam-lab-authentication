@@ -1,4 +1,4 @@
-package com.epam.esm.entity;
+package com.epam.esm.controller.util;
 
 import com.epam.esm.util.ResourceBundleErrorMessage;
 

@@ -2,7 +2,7 @@ package com.epam.esm.service;
 
 import com.epam.esm.dto.RequestUserDto;
 import com.epam.esm.dto.ResponseUserDto;
-import com.epam.esm.entity.Pagination;
+import com.epam.esm.controller.util.Pagination;
 import com.epam.esm.entity.User;
 import com.epam.esm.exception.ResourceAlreadyExistsException;
 import com.epam.esm.exception.ResourceNotFoundException;

@@ -1,7 +1,7 @@
 package com.epam.esm.controller;
 
-import com.epam.esm.entity.GiftCertificateCriteria;
-import com.epam.esm.entity.Pagination;
+import com.epam.esm.dao.util.GiftCertificateCriteria;
+import com.epam.esm.controller.util.Pagination;
 import com.epam.esm.service.util.linkbuilder.NavigationLinkBuilder;
 import com.epam.esm.dto.RequestGiftCertificateDto;
 import com.epam.esm.dto.ResponseGiftCertificateDto;

@@ -4,7 +4,7 @@ import com.epam.esm.controller.GiftCertificateController;
 import com.epam.esm.controller.PurchaseController;
 import com.epam.esm.controller.UserController;
 import com.epam.esm.dto.ResponsePurchaseDto;
-import com.epam.esm.entity.Pagination;
+import com.epam.esm.controller.util.Pagination;
 import com.epam.esm.service.util.linkbuilder.LinkName;
 import com.epam.esm.service.util.linkbuilder.NavigationLinkBuilder;
 import org.springframework.hateoas.Link;

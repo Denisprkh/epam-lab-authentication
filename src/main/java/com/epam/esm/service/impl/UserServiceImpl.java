@@ -6,7 +6,7 @@ import com.epam.esm.dto.RequestUserDto;
 import com.epam.esm.dto.ResponseUserDto;
 import com.epam.esm.dto.mapper.impl.RequestUserDtoMapper;
 import com.epam.esm.dto.mapper.impl.ResponseUserDtoMapper;
-import com.epam.esm.entity.Pagination;
+import com.epam.esm.controller.util.Pagination;
 import com.epam.esm.entity.User;
 import com.epam.esm.entity.UserRole;
 import com.epam.esm.exception.ResourceAlreadyExistsException;
@@ -30,7 +30,6 @@ public class UserServiceImpl implements UserService {
     private final RequestUserDtoMapper requestUserDtoMapper;
     private final BCryptPasswordEncoder passwordEncoder;
     private final UserRoleDao userRoleDao;
-    private static final String ROLE_USER = "ROLE_USER";
 
     public UserServiceImpl(UserDao userDao, PaginationContextBuilder paginationContextBuilder,
                            ResponseUserDtoMapper responseUserDtoMapper, RequestUserDtoMapper requestUserDtoMapper,
@@ -72,7 +71,7 @@ public class UserServiceImpl implements UserService {
         if (findUserByLogin(requestUserDto.getLogin()).isPresent()) {
             throw new ResourceAlreadyExistsException(ResourceBundleErrorMessage.USER_ALREADY_EXISTS);
         }
-        UserRole userRole = userRoleDao.findByName(ROLE_USER);
+        UserRole userRole = userRoleDao.findDefault();
         User userForCreation = requestUserDtoMapper.toModel(requestUserDto);
         userForCreation.setPassword(passwordEncoder.encode(userForCreation.getPassword()));
         userForCreation.setUserRole(userRole);

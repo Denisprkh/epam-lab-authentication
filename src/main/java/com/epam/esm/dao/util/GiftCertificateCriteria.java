@@ -1,4 +1,4 @@
-package com.epam.esm.entity;
+package com.epam.esm.dao.util;
 
 import java.util.Set;
 

@@ -2,7 +2,7 @@ package com.epam.esm.service;
 
 import com.epam.esm.dto.RequestPurchaseDto;
 import com.epam.esm.dto.ResponsePurchaseDto;
-import com.epam.esm.entity.Pagination;
+import com.epam.esm.controller.util.Pagination;
 import com.epam.esm.exception.ResourceNotFoundException;
 
 import java.util.List;

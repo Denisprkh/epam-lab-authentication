@@ -2,7 +2,7 @@ package com.epam.esm.dao.giftcertificate;
 
 import com.epam.esm.dao.CommonDao;
 import com.epam.esm.entity.GiftCertificate;
-import com.epam.esm.entity.GiftCertificateCriteria;
+import com.epam.esm.dao.util.GiftCertificateCriteria;
 
 import java.util.List;
 import java.util.Optional;

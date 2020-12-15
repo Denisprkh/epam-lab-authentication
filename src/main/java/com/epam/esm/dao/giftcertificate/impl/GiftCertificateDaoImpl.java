@@ -4,7 +4,7 @@ import com.epam.esm.dao.util.GiftCertificateSearchCriteriaBuilder;
 import com.epam.esm.dao.giftcertificate.GiftCertificateDao;
 import com.epam.esm.dao.giftcertificate.GiftCertificateParameter;
 import com.epam.esm.entity.GiftCertificate;
-import com.epam.esm.entity.GiftCertificateCriteria;
+import com.epam.esm.dao.util.GiftCertificateCriteria;
 import com.epam.esm.exception.ResourceNotFoundException;
 import com.epam.esm.util.ResourceBundleErrorMessage;
 import org.springframework.stereotype.Repository;

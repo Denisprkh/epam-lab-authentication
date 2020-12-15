@@ -11,9 +11,9 @@ VALUES (1, 2),
        (1, 3),
        (2, 1);
 
-INSERT INTO user_role (name) VALUES ('ROLE_USER'), ('ROLE_ADMIN');
+INSERT INTO role (name, is_default) VALUES ('ROLE_USER', true), ('ROLE_ADMIN', false);
 
-INSERT INTO user (login, password, user_role_id) VALUES
+INSERT INTO user (login, password, role_id) VALUES
         ('john@gmail.com','5c7d0c90cf9e0ce560956179e8e82e7d', 1),
         ('helen54@mail.ru','7d9b6e2e6e712c6abe59f4a84b4b2ce1', 1);
 

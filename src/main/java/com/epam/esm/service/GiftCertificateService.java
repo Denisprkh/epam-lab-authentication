@@ -2,8 +2,8 @@ package com.epam.esm.service;
 
 import com.epam.esm.dto.RequestGiftCertificateDto;
 import com.epam.esm.dto.ResponseGiftCertificateDto;
-import com.epam.esm.entity.GiftCertificateCriteria;
-import com.epam.esm.entity.Pagination;
+import com.epam.esm.dao.util.GiftCertificateCriteria;
+import com.epam.esm.controller.util.Pagination;
 import com.epam.esm.exception.ResourceAlreadyExistsException;
 import com.epam.esm.exception.ResourceNotFoundException;
 

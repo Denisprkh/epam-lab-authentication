@@ -1,6 +1,5 @@
 package com.epam.esm.controller.exception;
 
-import com.epam.esm.exception.JwtFormatException;
 import com.epam.esm.exception.ResourceAlreadyExistsException;
 import com.epam.esm.exception.ResourceNotFoundException;
 import com.epam.esm.util.ResourceBundleErrorMessage;
@@ -80,13 +79,6 @@ public class CustomExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
     }
 
-    @ExceptionHandler(JwtFormatException.class)
-    public ResponseEntity<ExceptionResponse> handleJwtFormatException(JwtFormatException e, Locale locale) {
-        String errorMessage = messageSource.getMessage(ResourceBundleErrorMessage.JWT_FORMAT, new Object[]{}, locale);
-        ExceptionResponse response = new ExceptionResponse(HttpStatus.BAD_REQUEST.value(), errorMessage);
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-    }
-
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<ExceptionResponse> handleRuntimeException(RuntimeException e, Locale locale) {
         String errorMessage = messageSource.getMessage(ResourceBundleErrorMessage.INTERNAL_SERVER_ERROR, new Object[]{},
@@ -94,4 +86,5 @@ public class CustomExceptionHandler {
         ExceptionResponse response = new ExceptionResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), errorMessage);
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
 }

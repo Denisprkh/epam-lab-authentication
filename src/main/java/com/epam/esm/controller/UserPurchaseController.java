@@ -50,9 +50,9 @@ public class UserPurchaseController {
 
     private List<ResponsePurchaseDto> buildResponseAccordingIncomingFields(Set<String> fields, List<ResponsePurchaseDto> purchases) {
         ObjectMapper objectMapper = new ObjectMapper();
-        List<Map> purchasesWithRequestFields = purchases.stream().map(
+        List<Map<String, String>> purchasesWithRequestFields = purchases.stream().map(
                 purchase -> {
-                    Map map = objectMapper.convertValue(purchase, Map.class);
+                    Map<String, String> map = objectMapper.convertValue(purchase, Map.class);
                     if (nonNull(fields)) {
                         fields.add(LINKS_FIELD);
                         map.keySet().retainAll(fields);

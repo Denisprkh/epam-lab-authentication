@@ -5,11 +5,10 @@ import com.epam.esm.entity.UserRole;
 public interface UserRoleDao {
 
     /**
-     * Finds users role by name.
+     * Finds users role with default flag equals {@code True}.
      *
-     * @param name {@code UserRole}'s name.
      * @return found role.
      */
-    UserRole findByName(String name);
+    UserRole findDefault();
 
 }

@@ -6,7 +6,7 @@ import com.epam.esm.dto.RequestUserDto;
 import com.epam.esm.dto.ResponseUserDto;
 import com.epam.esm.dto.mapper.impl.RequestUserDtoMapper;
 import com.epam.esm.dto.mapper.impl.ResponseUserDtoMapper;
-import com.epam.esm.entity.Pagination;
+import com.epam.esm.controller.util.Pagination;
 import com.epam.esm.entity.User;
 import com.epam.esm.entity.UserRole;
 import com.epam.esm.exception.ResourceNotFoundException;
@@ -21,9 +21,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
-import javax.jws.soap.SOAPBinding;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -112,7 +110,7 @@ public class UserServiceTest {
         ResponseUserDto expectedResponseDto = buildResponseUserDto("login", 1);
 
         when(requestUserDtoMapper.toModel(requestUserDto)).thenReturn(mappedToModelUser);
-        when(userRoleDao.findByName("ROLE_USER")).thenReturn(buildRoleUser());
+        when(userRoleDao.findDefault()).thenReturn(buildRoleUser());
         when(userDao.create(mappedToModelUser)).thenReturn(expectedUser);
         when(responseUserDtoMapper.toDto(expectedUser)).thenReturn(expectedResponseDto);
         ResponseUserDto resultResponseUserDto = userService.createUser(requestUserDto);

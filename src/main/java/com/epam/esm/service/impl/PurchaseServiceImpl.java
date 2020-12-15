@@ -8,7 +8,7 @@ import com.epam.esm.dto.mapper.impl.ResponseGiftCertificateDtoMapper;
 import com.epam.esm.dto.mapper.impl.ResponsePurchaseDtoMapper;
 import com.epam.esm.entity.GiftCertificate;
 import com.epam.esm.entity.Purchase;
-import com.epam.esm.entity.Pagination;
+import com.epam.esm.controller.util.Pagination;
 import com.epam.esm.service.GiftCertificateService;
 import com.epam.esm.service.PurchaseService;
 import com.epam.esm.service.UserService;

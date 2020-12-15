@@ -10,17 +10,17 @@ import javax.persistence.EntityManager;
 public class UserRoleDaoImpl implements UserRoleDao {
 
     private final EntityManager entityManager;
-    private static final String FIND_USER_ROLE_BY_NAME = "FROM UserRole WHERE name=:name";
-    private static final String PARAMETER_USER_ROLE_NAME = "name";
+    private static final String PARAMETER_IS_DEFAULT = "isDefault";
+    private static final String FIND_USER_ROLE_BY_DEFAULT_FLAG = "FROM UserRole ur WHERE ur.isDefault=:isDefault";
 
     public UserRoleDaoImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
     @Override
-    public UserRole findByName(String name) {
-        return entityManager.createQuery(FIND_USER_ROLE_BY_NAME, UserRole.class)
-                .setParameter(PARAMETER_USER_ROLE_NAME, name)
+    public UserRole findDefault() {
+        return entityManager.createQuery(FIND_USER_ROLE_BY_DEFAULT_FLAG, UserRole.class)
+                .setParameter(PARAMETER_IS_DEFAULT, Boolean.TRUE)
                 .getSingleResult();
     }
 

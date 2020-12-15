@@ -1,6 +1,6 @@
 package com.epam.esm.service.util.pagination;
 
-import com.epam.esm.entity.Pagination;
+import com.epam.esm.controller.util.Pagination;
 import com.epam.esm.service.util.linkbuilder.LinkName;
 import com.epam.esm.util.PaginationParameter;
 import org.springframework.hateoas.Link;

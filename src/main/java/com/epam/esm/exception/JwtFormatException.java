@@ -7,6 +7,4 @@ public class JwtFormatException extends RuntimeException{
         super(message);
     }
 
-    public JwtFormatException(){
-    }
 }

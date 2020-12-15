@@ -13,10 +13,6 @@ public class ExceptionResponse {
         this.message = message;
     }
 
-    public ExceptionResponse(String errorMessage) {
-        this.message = errorMessage;
-    }
-
     public int getCode() {
         return code;
     }

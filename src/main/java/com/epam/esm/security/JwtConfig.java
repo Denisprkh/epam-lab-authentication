@@ -1,7 +1,6 @@
 package com.epam.esm.security;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -11,10 +10,6 @@ public class JwtConfig {
     private String key;
     private String tokenPrefix;
     private Integer daysBeforeExpiration;
-
-    public String getAuthorizationHeader() {
-        return HttpHeaders.AUTHORIZATION;
-    }
 
     public String getKey() {
         return key;

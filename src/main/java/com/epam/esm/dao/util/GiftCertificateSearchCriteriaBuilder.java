@@ -3,7 +3,6 @@ package com.epam.esm.dao.util;
 import com.epam.esm.dao.giftcertificate.GiftCertificateParameter;
 import com.epam.esm.dao.tag.TagParameter;
 import com.epam.esm.entity.GiftCertificate;
-import com.epam.esm.entity.GiftCertificateCriteria;
 import com.epam.esm.entity.Tag;
 import org.springframework.stereotype.Component;
 

@@ -26,7 +26,7 @@ public class User {
     private List<Purchase> purchases;
 
     @ManyToOne
-    @JoinColumn(name = "user_role_id")
+    @JoinColumn(name = "role_id")
     private UserRole userRole;
 
     public User() {

@@ -4,7 +4,7 @@ import com.epam.esm.dao.purchase.PurchaseDao;
 import com.epam.esm.dto.*;
 import com.epam.esm.dto.mapper.impl.ResponsePurchaseDtoMapper;
 import com.epam.esm.entity.Purchase;
-import com.epam.esm.entity.Pagination;
+import com.epam.esm.controller.util.Pagination;
 import com.epam.esm.exception.ResourceNotFoundException;
 import com.epam.esm.service.util.pagination.PaginationContextBuilder;
 import org.junit.jupiter.api.Test;

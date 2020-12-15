@@ -8,8 +8,8 @@ import com.epam.esm.dto.mapper.impl.RequestGiftCertificateDtoMapper;
 import com.epam.esm.dto.mapper.impl.ResponseGiftCertificateDtoMapper;
 import com.epam.esm.dto.mapper.impl.ResponseTagDtoMapper;
 import com.epam.esm.entity.GiftCertificate;
-import com.epam.esm.entity.GiftCertificateCriteria;
-import com.epam.esm.entity.Pagination;
+import com.epam.esm.dao.util.GiftCertificateCriteria;
+import com.epam.esm.controller.util.Pagination;
 import com.epam.esm.entity.Tag;
 import com.epam.esm.exception.ResourceAlreadyExistsException;
 import com.epam.esm.exception.ResourceNotFoundException;
@@ -24,7 +24,6 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 

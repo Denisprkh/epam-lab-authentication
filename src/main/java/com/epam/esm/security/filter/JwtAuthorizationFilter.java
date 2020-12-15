@@ -1,9 +1,12 @@
 package com.epam.esm.security.filter;
 
+import com.epam.esm.exception.JwtFormatException;
 import com.epam.esm.security.JwtConfig;
 import com.epam.esm.security.JwtUserDetailsService;
 import com.epam.esm.security.util.JwtUtil;
-import org.apache.commons.lang3.StringUtils;
+import com.epam.esm.util.ResourceBundleErrorMessage;
+import io.jsonwebtoken.JwtException;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -35,14 +38,19 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String authorizationHeader = request.getHeader(jwtConfig.getAuthorizationHeader());
+        String authorizationHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
 
         String token = null;
         String login = null;
 
         if (nonNull(authorizationHeader) && authorizationHeader.startsWith(jwtConfig.getTokenPrefix())) {
-            token = extractToken(authorizationHeader);
-            login = jwtUtil.extractLogin(token);
+            try {
+                token = jwtUtil.extractToken(authorizationHeader);
+                login = jwtUtil.extractLogin(token);
+            }catch (JwtException e){
+                throw new JwtFormatException(ResourceBundleErrorMessage.JWT_FORMAT);
+            }
+
         }
 
         if (nonNull(login) && isNull(SecurityContextHolder.getContext().getAuthentication())) {
@@ -56,10 +64,6 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
             }
         }
         filterChain.doFilter(request, response);
-    }
-
-    private String extractToken(String authorizationHeader) {
-        return authorizationHeader.replace(jwtConfig.getTokenPrefix(), StringUtils.EMPTY);
     }
 
 }

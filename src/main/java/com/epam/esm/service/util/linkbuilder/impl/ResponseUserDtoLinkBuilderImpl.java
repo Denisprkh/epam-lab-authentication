@@ -3,7 +3,7 @@ package com.epam.esm.service.util.linkbuilder.impl;
 import com.epam.esm.controller.UserController;
 import com.epam.esm.controller.UserPurchaseController;
 import com.epam.esm.dto.ResponseUserDto;
-import com.epam.esm.entity.Pagination;
+import com.epam.esm.controller.util.Pagination;
 import com.epam.esm.service.util.linkbuilder.LinkName;
 import com.epam.esm.service.util.linkbuilder.NavigationLinkBuilder;
 import org.springframework.stereotype.Component;
