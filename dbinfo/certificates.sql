@@ -57,12 +57,14 @@ CREATE TABLE IF NOT EXISTS `certificates`.`gift_certificate_tag` (
 
 
 -- -----------------------------------------------------
--- Table `certificates`.`user_role`
+-- Table `certificates`.`role`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `certificates`.`user_role` (
-  `user_role_id` INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `certificates`.`role` (
+  `role_id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`user_role_id`));
+  `is_default` TINYINT DEFAULT FALSE,
+  PRIMARY KEY (`role_id`),
+  UNIQUE INDEX `Name_UNIQUE` (`name` ASC));
 
 
 -- -----------------------------------------------------
@@ -72,12 +74,12 @@ CREATE TABLE IF NOT EXISTS `certificates`.`user` (
   `user_id` INT NOT NULL AUTO_INCREMENT,
   `login` VARCHAR(70) NOT NULL,
   `password` VARCHAR(500) NOT NULL,
-  `user_role_id` INT NOT NULL,
+  `role_id` INT NOT NULL DEFAULT 1,
   PRIMARY KEY (`user_id`),
-  INDEX `fk_user_user_role1_idx` (`user_role_id` ASC),
-  CONSTRAINT `fk_user_user_role1`
-    FOREIGN KEY (`user_role_id`)
-    REFERENCES `certificates`.`user_role` (`user_role_id`));
+  INDEX `fk_role1_idx` (`role_id` ASC),
+  CONSTRAINT `fk_role1`
+    FOREIGN KEY (`role_id`)
+    REFERENCES `certificates`.`role` (`role_id`));
 
 
 -- -----------------------------------------------------
@@ -111,10 +113,9 @@ CREATE TABLE IF NOT EXISTS `certificates`.`purchase_gift_certificate` (
     FOREIGN KEY (`purchase_id`)
     REFERENCES `certificates`.`purchase` (`purchase_id`));
 
-INSERT INTO user_role(name) VALUES ('ROLE_USER'), ('ROLE_ADMIN');
-INSERT INTO user(login, password, user_role_id) VALUES ('admin', '$2a$10$3A0xvWaRn8YR2dvhSfFJDOCyDxhVJmLuCxxN/ArFcKDkSjtap1YUe', 2);
+INSERT INTO role(name, is_default) VALUES ('ROLE_USER', TRUE), ('ROLE_ADMIN', FALSE);
+INSERT INTO user(login, password, role_id) VALUES ('admin', '$2a$10$3A0xvWaRn8YR2dvhSfFJDOCyDxhVJmLuCxxN/ArFcKDkSjtap1YUe', 2);
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
