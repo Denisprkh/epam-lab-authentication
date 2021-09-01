@@ -1,0 +1,757 @@
+{
+	"info": {
+		"_postman_id": "e5bdf634-721d-4d7d-8fc3-aba77ec2abeb",
+		"name": "esm-collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Post tag",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1b9777f7-879d-40a0-bb23-df831e1b90da",
+						"exec": [
+							"try{\r",
+							"    pm.environment.set(\"createdTagId\", pm.response.json.arguments.get(\"id\"));\r",
+							"}catch(e){\r",
+							"    console.log(e)\r",
+							"}\r",
+							"pm.environment.get(\"variable_key\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"type": "text",
+						"value": "en"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {adminToken}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \r\n    \"name\" : \"tag\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/tags",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tags"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get tag",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6ec7daa2-015c-4d40-99ca-d81bf86f1a82",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {user/admintoken}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/tags/{tagId}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tags",
+						"{tagId}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get certificate",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/giftCertificates/{certificateId}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"giftCertificates",
+						"{certificateId}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post certificate",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f1c0d88e-a5d6-4147-b27c-a19ccc6817f9",
+						"exec": [
+							"try{\r",
+							"    pm.environment.set(\"createdCertificateId\", pm.response.json.arguments.get(\"id\"));\r",
+							"}catch(e){\r",
+							"    console.log(e)\r",
+							"}\r",
+							"pm.environment.get(\"variable_key\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {adminToken}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"name\" : \"ceraticate\",\r\n \"price\" : \"130.72\",\r\n \"description\" : \"desc\",\r\n \"duration\" : \"PT132H22M\",\r\n \"tags\":[\r\n     {\r\n        \"name\":\"newTag\"\r\n     },\r\n     {\r\n         \"name\" : \"finaltag\"\r\n     },\r\n     {\r\n         \"name\" : \"cert\"\r\n     }\r\n ]\r\n} ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/giftCertificates",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"giftCertificates"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete tag",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {adminToken}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/tags/{tagId}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tags",
+						"{tagId}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update certificate",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {adminToken}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n       \"price\" : \"100.10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/giftCertificates/{certificateId}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"giftCertificates",
+						"{certificateId}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete certificate",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {adminToken}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/giftCertificates/{certificateId}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"giftCertificates",
+						"{certificateId}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get certificates by params",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/giftCertificates?page={page}&size={size}&order={(createDate:asc/desc)(name:asc/desc)}&tagName={tagName},{tagName}&giftCertName={name}&giftCertDesc={desc}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"giftCertificates"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "{page}"
+						},
+						{
+							"key": "size",
+							"value": "{size}"
+						},
+						{
+							"key": "order",
+							"value": "{(createDate:asc/desc)(name:asc/desc)}"
+						},
+						{
+							"key": "tagName",
+							"value": "{tagName},{tagName}"
+						},
+						{
+							"key": "giftCertName",
+							"value": "{name}"
+						},
+						{
+							"key": "giftCertDesc",
+							"value": "{desc}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all tags",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {user/adminToken}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/tags?page={page}&size={size}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tags"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "{page}"
+						},
+						{
+							"key": "size",
+							"value": "{size}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post purchase",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"type": "text",
+						"value": "en"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {user/adminToken}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"certificatesId\" : [\r\n       1\r\n   ],\r\n   \"userId\" : \"2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/purchases",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"purchases"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get purchase",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"type": "text",
+						"value": "en"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {user/adminToken}"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/purchases/{purchaseId}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"purchases",
+						"{purchaseId}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all purchases",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"type": "text",
+						"value": "en"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {adminToken}"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/purchases?page={page}&size={size}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"purchases"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "{page}"
+						},
+						{
+							"key": "size",
+							"value": "{size}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Gel all users",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {adminToken}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"login\" : \"someLogin\",\r\n    \"password\" : \"somePassword\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users?page={page}&size={size}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "{page}"
+						},
+						{
+							"key": "size",
+							"value": "{size}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get user",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {user/adminToken}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/users/{userId}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"{userId}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get the most popular  tag in user with the highest cost of orders",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {user/adminToken}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/tags/most-paid-popular",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tags",
+						"most-paid-popular"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sign up",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"login\" : \"login\",\r\n    \"password\" : \"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/signUp",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"signUp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sign in (user)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"login\" : \"login\",\r\n    \"password\" : \"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/signIn",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"signIn"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sign In (Admin)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"login\" : \"admin\",\r\n    \"password\" : \"admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/signIn",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"signIn"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get users purchases",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {user/adminToken}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/users/{userId}/purchases",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"{userId}",
+						"purchases"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
